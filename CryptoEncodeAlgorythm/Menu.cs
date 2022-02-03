@@ -11,14 +11,14 @@ namespace CryptoEncodeAlgorythm
         }
 
         // Ограничение для длины ключа - не менее 3х символов
-        public static string AskKey()
+        public static string AskKey(bool checkLength)
         {
             string keyPhrase = string.Empty;
             do
             {
                 Console.WriteLine("Please write key-phrase:");
                 keyPhrase = Console.ReadLine().Trim();
-                if (keyPhrase.Length < 3)
+                if (keyPhrase.Length < 3 && checkLength)
                     Console.WriteLine("The key phrase is to silly! Try again");
             }
             while (keyPhrase.Length < 3);
@@ -36,9 +36,21 @@ namespace CryptoEncodeAlgorythm
                     Console.WriteLine("The phrase is empty! Try again");
                 else if (!Regex.Match(phrase, @"[a-z]").Success)
                     Console.WriteLine("The phrase contains nothing to encode. Please, try again!");
-                else return phrase.ToUpper();
+                else return phrase;
             }
             while (true);
+        }
+
+        public static void GoNext()
+        {
+            for (int i = 0; i < 25; i++)
+            {
+                Console.Write("=");
+            }
+            Console.WriteLine("\nYOUR DATA IS NOT SECURE!");
+            Console.WriteLine("\nTo go next press any key...");
+            Console.ReadKey();
+            Console.Clear();
         }
     }
 }
